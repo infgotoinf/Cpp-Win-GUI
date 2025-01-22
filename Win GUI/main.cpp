@@ -24,14 +24,18 @@ void generate_bombs(int** field)
 // Функция изменения 0 на другие цифры
 void change_nums(int** field)
 {
-	for (int i = 0; i < 10; i++) {
-		for (int i2 = 0; i2 < 10; i2++) {
-			if (field[i][i2] == -1) continue;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int i2 = 0; i2 < 10; i2++)
+		{
 			int counter = 0;
-			for (int j = -1; j <= 1; j++) {
-				for (int j2 = -1; j2 <= 1; j2++) {
+			if (field[i][i2] == -1) continue;
+			else for (int j = -1; j <= 1; j++)
+			{
+				for (int j2 = -1; j2 <= 1; j2++)
+				{
 					if ((j == 0 && j2 == 0) || i + j < 0 || i + j > 9 || i2 + j2 < 0 || i2 + j2 > 9) continue;
-					if (field[i + j][i2 + j2] == -1) counter++;
+					else if (field[i + j][i2 + j2] == -1) counter++;
 				}
 			}
 			field[i][i2] = counter;
