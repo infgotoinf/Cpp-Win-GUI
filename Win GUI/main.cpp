@@ -80,21 +80,25 @@ void field_opener(int** field, int buttonId)
 	}
 }
 
+// Функция открытия поля после проигрыша
+void lose(int** field)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		for (int i2 = 0; i2 < 10; i2++)
+		{
+			if (field[i][i2] == -1) {
+				SetWindowTextW(button[i][i2], std::to_wstring(field[i][i2]).c_str());
+			}
+
+			EnableWindow(button[i][i2], false);
+		}
+	}
+}
+
+
 LRESULT CALLBACK ProcessMessage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 {
-	/*while (1) {
-		if (did) break;
-
-		for (int i = 0; i < 10; i++)
-		{
-			field[i] = new int[10] { 0 };
-		}
-		for (int i = 0; i < 25; i++) generate_bombs(field);
-		change_nums(field);
-
-		did = true;
-	}*/
-
 	switch (msg)
 	{
 	case WM_DESTROY:
@@ -116,7 +120,7 @@ LRESULT CALLBACK ProcessMessage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 			if (msgCode == BN_CLICKED)
 			{
 				if (!game_started) {
-					for (int i = 0; i < 25; i++) generate_bombs(field, buttonId);
+					for (int i = 0; i < 20; i++) generate_bombs(field, buttonId);
 					change_nums(field);
 					game_started = true;
 				}
@@ -126,6 +130,7 @@ LRESULT CALLBACK ProcessMessage(HWND hwnd, UINT msg, WPARAM wp, LPARAM lp)
 				field_opener(field, buttonId);
 				if (field[buttonId / 10][buttonId % 10] == -1) {
 					MessageBoxW(NULL, L"YOU LOST!", L"End Screen", NULL);
+					lose(field);
 				}
 			}
 		}
