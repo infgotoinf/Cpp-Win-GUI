@@ -164,7 +164,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 		0,
 		mainWindow,
 		L"Saper",
-		WS_OVERLAPPEDWINDOW,
+		WS_OVERLAPPEDWINDOW & ~WS_THICKFRAME & ~WS_MAXIMIZEBOX,
 		CW_USEDEFAULT, CW_USEDEFAULT, 515, 538,
 		nullptr,
 		nullptr,
